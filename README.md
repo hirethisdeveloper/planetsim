@@ -14,8 +14,7 @@ Download the project here:
 Execute the following commands then to install dependencies:
 
 - cd planetsim
-- npm preinstall
-- npm postinstall
+- npm install
 - npm start
 
 If you will be developing on the project, run this additionally in another terminal:
