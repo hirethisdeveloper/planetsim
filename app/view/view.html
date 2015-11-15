@@ -1,0 +1,230 @@
+<div class="view">
+
+    <!-- sidebar -->
+    <div class="sidebar" ng-class="{'collapsed': !sidebarVisible}">
+
+        <div class="collapseBar vertical">
+            <a ng-href="" ng-click="sidebarVisible=!sidebarVisible"></a>
+        </div>
+
+        <form name="demoForm" novalidate ng-submit="">
+
+            <fieldset class="objectSettings">
+                <legend>Animation Factor</legend>
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div id="animationSlider"></div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- center object controls -->
+            <fieldset class="objectSettings">
+                <legend>Inner Object</legend>
+
+                <input class="orbitStatusCheck" type="checkbox" ng-model="data.inner.status">
+
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="row">
+                            <div class="large-6 medium-6 columns">
+                                <label class="left inline">Advanced</label>
+                            </div>
+                            <div class="large-6 medium-6 columns text-right">
+                                <input type="checkbox" ng-model="data.inner.advanced">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="row">
+                            <div class="large-6 medium-6 columns">
+                                <label class="left">Color</label>
+                            </div>
+                            <div class="large-6 medium-6 columns text-right">
+                                <spectrum ng-model="data.inner.color" options="spectrum"></spectrum>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-12 medium-12 columns">
+                        <div class="row">
+                            <div class="large-6 medium-6 columns">
+                                <label class="left inline">Diameter</label>
+                            </div>
+                            <div class="large-6 medium-6 columns text-right">
+                                <input type="number" ng-model="data.inner.diameter" min="50" max="175">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <fieldset class="rotation">
+                    <legend>Rotation</legend>
+                    <div class="row" ng-show="data.inner.advanced">
+                        <div class="large-12 medium-12 columns">
+                            <div class="row">
+                                <div class="large-6 medium-6 columns">
+                                    <label class="left inline">Degree</label>
+                                </div>
+                                <div class="large-6 medium-6 columns text-right">
+                                    <input type="number" ng-model="data.inner.rotation.degree">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 medium-12 columns">
+                            <div class="row">
+                                <div class="large-6 medium-6 columns">
+                                    <label class="left inline">Timeout(ms)</label>
+                                </div>
+                                <div class="large-6 medium-6 columns text-right">
+                                    <input type="number" ng-model="data.inner.rotation.timeout" min="0" max="500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <!-- // center object controls -->
+
+            <button class="btn expand" ng-click="addOrbit();">+ Add Orbit</button>
+
+            <!-- orbital objects controls -->
+            <fieldset ng-repeat="obj in data.orbits" class="objectSettings">
+                <legend ng-click="obj.visible=!obj.visible">
+                    <span ng-show="obj.visible"> - </span>
+                    <span ng-show="!obj.visible"> + </span>
+                    Orbit Object #{{$index + 1}} -
+                </legend>
+
+                <input class="orbitStatusCheck" type="checkbox" ng-model="obj.status">
+
+                <button class="delBtn" ng-click="deleteObject($index);">DEL</button>
+
+                <div ng-show="obj.visible">
+
+                    <div class="row">
+                        <div class="large-12 medium-12 columns">
+                            <div class="row">
+                                <div class="large-6 medium-6 columns">
+                                    <label class="left inline">Advanced</label>
+                                </div>
+                                <div class="large-6 medium-6 columns text-right">
+                                    <input type="checkbox" ng-model="obj.advanced">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-12 medium-12 columns">
+                            <div class="row">
+                                <div class="large-6 medium-6 columns">
+                                    <label class="left">Color</label>
+                                </div>
+                                <div class="large-6 medium-6 columns text-right">
+                                    <spectrum ng-model="obj.color" options="spectrum"></spectrum>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-12 medium-12 columns">
+                            <div class="row">
+                                <div class="large-6 medium-6 columns">
+                                    <label class="left inline">Diameter</label>
+                                </div>
+                                <div class="large-6 medium-6 columns text-right">
+                                    <input type="number" ng-model="obj.diameter" min="20" max="75">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="rotation">
+                        <legend>Rotation</legend>
+                        <div class="row" ng-show="obj.advanced">
+                            <div class="large-12 medium-12 columns">
+                                <div class="row">
+                                    <div class="large-6 medium-6 columns">
+                                        <label class="left inline">Degree</label>
+                                    </div>
+                                    <div class="large-6 medium-6 columns text-right">
+                                        <input type="number" ng-model="obj.rotation.degree">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 medium-12 columns">
+                                <div class="row">
+                                    <div class="large-6 medium-6 columns">
+                                        <label class="left inline">Timeout(ms)</label>
+                                    </div>
+                                    <div class="large-6 medium-6 columns text-right">
+                                        <input type="number" ng-model="obj.rotation.timeout" min="0" max="500">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="rotation">
+                        <legend>Orbit</legend>
+                        <div class="row" ng-show="obj.advanced">
+                            <div class="large-12 medium-12 columns">
+                                <div class="row">
+                                    <div class="large-6 medium-6 columns">
+                                        <label class="left inline">Degree</label>
+                                    </div>
+                                    <div class="large-6 medium-6 columns text-right">
+                                        <input type="number" ng-model="obj.orbit.degree">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 medium-12 columns">
+                                <div class="row">
+                                    <div class="large-6 medium-6 columns">
+                                        <label class="left inline">Timeout(ms)</label>
+                                    </div>
+                                    <div class="large-6 medium-6 columns text-right">
+                                        <input type="number" ng-model="obj.orbit.timeout" min="0" max="500">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <!-- // orbital objects controls -->
+        </form>
+    </div>
+    <!-- // sidebar -->
+
+    <!-- drawable objects area -->
+    <div class="contentarea">
+        <inner data="data.inner"></inner>
+        <orbit data="obj" idx="{{$index}}" ng-repeat="obj in data.orbits"></orbit>
+    </div>
+
+    <!-- logging panel -->
+    <div class="loggingPanel" ng-class="{'collapsed': !loggingPanelVisible, 'shared': sidebarVisible}">
+        <div class="collapseBar horizontal">
+            <a ng-href="" ng-click="loggingPanelVisible=!loggingPanelVisible"></a>
+        </div>
+        <div class="output">
+            <pre ng-repeat="item in loggingOutputArr">{{item.dateObj | date:"medium"}}{{item.text}}</pre>
+        </div>
+    </div>
+    <!-- // logging panel -->
+</div>
+
