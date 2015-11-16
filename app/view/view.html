@@ -13,12 +13,13 @@
                 <legend>Animation Factor</legend>
                 <div class="row">
                     <div class="large-12 medium-12 columns">
-                        <div id="animationSlider"></div>
+                        <slider config="animation.config" element-id="animationSlider"
+                                output="animation.factor"></slider>
                     </div>
                 </div>
             </fieldset>
 
-            <!-- center object controls -->
+            <!-- inner object controls -->
             <fieldset class="objectSettings">
                 <legend>Inner Object</legend>
 
@@ -52,12 +53,12 @@
 
                 <div class="row">
                     <div class="large-12 medium-12 columns">
+                        <label>Diameter</label>
+
                         <div class="row">
-                            <div class="large-6 medium-6 columns">
-                                <label class="left inline">Diameter</label>
-                            </div>
-                            <div class="large-6 medium-6 columns text-right">
-                                <input type="number" ng-model="data.inner.diameter" min="50" max="175">
+                            <div class="large-12 medium-12 columns">
+                                <slider config="inner.diameterConfig" element-id="innerDiameterId"
+                                        output="data.inner.diameter"></slider>
                             </div>
                         </div>
                     </div>
@@ -77,23 +78,27 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="large-12 medium-12 columns">
+                            <label>Speed</label>
+
                             <div class="row">
-                                <div class="large-6 medium-6 columns">
-                                    <label class="left inline">Timeout(ms)</label>
-                                </div>
-                                <div class="large-6 medium-6 columns text-right">
-                                    <input type="number" ng-model="data.inner.rotation.timeout" min="0" max="500">
+                                <div class="large-12 medium-12 columns">
+                                    <slider config="inner.speedConfig" element-id="innerRotationSpeedId"
+                                            output="data.inner.rotation.timeout"></slider>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </fieldset>
             </fieldset>
-            <!-- // center object controls -->
+            <!-- // inner object controls -->
 
+            <!-- add an orbit button -->
             <button class="btn expand" ng-click="addOrbit();">+ Add Orbit</button>
+            <!-- // add an orbit button -->
 
             <!-- orbital objects controls -->
             <fieldset ng-repeat="obj in data.orbits" class="objectSettings">
@@ -135,18 +140,20 @@
                         </div>
                     </div>
 
+
                     <div class="row">
                         <div class="large-12 medium-12 columns">
+                            <label>Diameter</label>
+
                             <div class="row">
-                                <div class="large-6 medium-6 columns">
-                                    <label class="left inline">Diameter</label>
-                                </div>
-                                <div class="large-6 medium-6 columns text-right">
-                                    <input type="number" ng-model="obj.diameter" min="20" max="75">
+                                <div class="large-12 medium-12 columns">
+                                    <slider config="obj.configs.diameterConfig" element-id="orbitObject_{{$index}}"
+                                            output="obj.diameter"></slider>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <fieldset class="rotation">
                         <legend>Rotation</legend>
@@ -162,18 +169,21 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="large-12 medium-12 columns">
+                                <label>Speed</label>
+
                                 <div class="row">
-                                    <div class="large-6 medium-6 columns">
-                                        <label class="left inline">Timeout(ms)</label>
-                                    </div>
-                                    <div class="large-6 medium-6 columns text-right">
-                                        <input type="number" ng-model="obj.rotation.timeout" min="0" max="500">
+                                    <div class="large-12 medium-12 columns">
+                                        <slider config="obj.configs.speedConfig"
+                                                element-id="orbitObjectRotationSpeed_{{$index}}"
+                                                output="obj.rotation.timeout"></slider>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </fieldset>
 
                     <fieldset class="rotation">
@@ -190,18 +200,21 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="large-12 medium-12 columns">
+                                <label>Speed</label>
+
                                 <div class="row">
-                                    <div class="large-6 medium-6 columns">
-                                        <label class="left inline">Timeout(ms)</label>
-                                    </div>
-                                    <div class="large-6 medium-6 columns text-right">
-                                        <input type="number" ng-model="obj.orbit.timeout" min="0" max="500">
+                                    <div class="large-12 medium-12 columns">
+                                        <slider config="obj.configs.orbitConfig"
+                                                element-id="orbitObjectOrbitSpeed_{{$index}}"
+                                                output="obj.orbit.timeout"></slider>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </fieldset>
                 </div>
             </fieldset>
