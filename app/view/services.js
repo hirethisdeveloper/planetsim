@@ -27,9 +27,10 @@ view.factory('Services', ['$log', function ($log) {
                 }
             };
         },
-        getRandom:             function (low, high) {
-            // Generates a random number between passed low and high values
-            return Math.floor((Math.random() * high) + low);
+        getRandom:             function (min, max) {
+		min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
         }
     }
 }]);
